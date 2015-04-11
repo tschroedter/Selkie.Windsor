@@ -60,9 +60,9 @@ The project started as a little ant colony optimization application. Over time t
 * Selkie Services Lines
 * Selkie Services Monitor
 * Selkie Services Racetracks
-* Selkie WPF
 * Selkie Web
 * Selkie Windsor
+* Selkie WPF
 * Selkie XUnit Extensions
  
 
