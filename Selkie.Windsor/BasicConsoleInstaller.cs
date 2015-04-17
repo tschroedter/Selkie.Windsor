@@ -29,6 +29,9 @@ namespace Selkie.Windsor
                 CallAssemblyInstaller(container,
                                       assembly);
             }
+
+            InstallComponents(container,
+                              store);
         }
 
         [NotNull]
@@ -58,13 +61,10 @@ namespace Selkie.Windsor
         {
             string name = assembly.ManifestModule.Name;
 
-            if ( name.EndsWith(".Console.dll",
-                               StringComparison.CurrentCultureIgnoreCase) ||
-                 name.EndsWith(".SpecFlow.dll",
-                               StringComparison.CurrentCultureIgnoreCase) ||
-                 //IsSelkieSelkieEasyNetQAssembly(assembly) ||
-                 IsSelkieWindsorAssembly(assembly) )
+            if ( IsSelkieWindsorAssembly(assembly) )
             {
+                Console.WriteLine("Assembly '{0}' is ignored!",
+                                  name);
                 return;
             }
 
@@ -87,7 +87,6 @@ namespace Selkie.Windsor
 
             FileInfo[] dlls = directoryrInfo.GetFiles("*.dll");
 
-            // ReSharper disable once LoopCanBeConvertedToQuery
             AddDllsToAssemblyList(dlls,
                                   allAssembly);
 
