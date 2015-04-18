@@ -18,13 +18,16 @@ namespace Selkie.Windsor
         public void Install([NotNull] IWindsorContainer container,
                             [NotNull] IConfigurationStore store)
         {
-            IEnumerable <Assembly> all = AllAssembly()
+            IEnumerable <Assembly> allAssemblies = AllAssembly()
+                .OrderBy(x => x.FullName)
                 .ToArray();
 
-            Assembly selkieWindsor = GetSelkieWindsor(all); // need to install first, other depend on it
+            DisplayAssemblies(allAssemblies);
+
+            Assembly selkieWindsor = GetSelkieWindsor(allAssemblies); // need to install first, other depend on it
             container.Install(FromAssembly.Instance(selkieWindsor));
 
-            foreach ( Assembly assembly in all )
+            foreach ( Assembly assembly in allAssemblies )
             {
                 CallAssemblyInstaller(container,
                                       assembly);
@@ -32,6 +35,16 @@ namespace Selkie.Windsor
 
             InstallComponents(container,
                               store);
+        }
+
+        private static void DisplayAssemblies(IEnumerable <Assembly> all)
+        {
+            Console.WriteLine("Running installers for the following assemblies:");
+
+            foreach ( Assembly assembly in all )
+            {
+                Console.WriteLine(assembly.FullName);
+            }
         }
 
         [NotNull]
@@ -61,14 +74,22 @@ namespace Selkie.Windsor
         {
             string name = assembly.ManifestModule.Name;
 
-            if ( IsSelkieWindsorAssembly(assembly) )
+            if ( name.Contains("Console") ||
+                 name.Contains("SpecFlow") ||
+                 IsSelkieWindsorAssembly(assembly) )
             {
+                Console.WriteLine("Installer ignored assembly: {0}",
+                                  name);
+
                 return;
             }
 
             if ( name.StartsWith("Selkie.",
                                  StringComparison.Ordinal) )
             {
+                Console.WriteLine("Installer runs installer for assembly: {0}",
+                                  name);
+
                 container.Install(FromAssembly.Instance(assembly));
             }
         }
