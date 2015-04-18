@@ -63,8 +63,6 @@ namespace Selkie.Windsor
 
             if ( IsSelkieWindsorAssembly(assembly) )
             {
-                Console.WriteLine("Assembly '{0}' is ignored!",
-                                  name);
                 return;
             }
 
