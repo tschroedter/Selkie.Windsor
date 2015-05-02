@@ -8,15 +8,16 @@ Please, check the provided examples for more details.
 # Examples:
 
 Singelton
-
+```CS
     [ProjectComponent(Lifestyle.Singleton)]
     public class SingeltonTest : ISingeltonTest
     {
         public int SomeInteger { get; set; }
     }
+```
 
 Startable
-
+```CS
     [ProjectComponent(Lifestyle.Startable)]
     public class StartableTest : IStartableTest,
                                  IStartable
@@ -33,14 +34,16 @@ Startable
 
         public int SomeInteger { get; set; }
     }
+```
 
 TypedFactory
-
+```CS
     public interface ITypedFactoryTest : ITypedFactory
     {
         ITransientTest Create();
         void Release([NotNull] ITransientTest transientTest);
     }
+```
 
 # Selkie
 Selkie.Windsor is part of the Selkie project which is based on Castle Windsor and EasyNetQ. The main goal of the Selkie project is to calculate and displays the shortest path for a boat travelling along survey lines from point A to B. The algorithm takes into account the minimum required turn circle of a vessel required to navigate from one line to another.
@@ -51,7 +54,7 @@ The project started as a little ant colony optimization application. Over time t
 
 * Selkie ACO
 * Selkie Common
-* Selkie EasyNetQ
+* [Selkie EasyNetQ](https://github.com/tschroedter/Selkie.EasyNetQ)
 * Selkie Geometry
 * Selkie NUnit Extensions
 * Selkie Racetrack
@@ -61,7 +64,7 @@ The project started as a little ant colony optimization application. Over time t
 * Selkie Services Monitor
 * Selkie Services Racetracks
 * Selkie Web
-* Selkie Windsor
+* [Selkie Windsor](https://github.com/tschroedter/Selkie.Windsor)
 * Selkie WPF
 * Selkie XUnit Extensions
  
