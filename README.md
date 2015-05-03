@@ -66,6 +66,6 @@ The project started as a little ant colony optimization application. Over time t
 * Selkie Web
 * [Selkie Windsor](https://github.com/tschroedter/Selkie.Windsor)
 * Selkie WPF
-* Selkie XUnit Extensions
+* [Selkie XUnit Extensions](https://github.com/tschroedter/Selkie.XUnit.Extensions)
  
 
