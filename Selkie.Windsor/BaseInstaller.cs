@@ -17,7 +17,7 @@ namespace Selkie.Windsor
 
             Assembly assembly = GetAssembly();
 
-            IProjectComponentLoader loader = container.Resolve <IProjectComponentLoader>();
+            var loader = container.Resolve <IProjectComponentLoader>();
 
             loader.Load(container,
                         assembly);

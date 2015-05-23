@@ -21,7 +21,7 @@
     <projectUrl>https://nuget.org/packages/Selkie.Windsor</projectUrl>
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <licenseUrlhttps://github.com/tschroedter/Selkie.Windsor/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/tschroedter/Selkie.Windsor/blob/master/LICENSE</licenseUrl>
     <copyright>Copyright © Thomas Schroedter 2015</copyright>
     <dependencies>
       <group targetFramework="net40">

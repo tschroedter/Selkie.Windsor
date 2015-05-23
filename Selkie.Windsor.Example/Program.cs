@@ -14,16 +14,16 @@ namespace Selkie.Windsor.Example
             IWindsorContainer container = new WindsorContainer();
             container.Install(FromAssembly.This());
 
-            SingeltonExample singelton = new SingeltonExample();
+            var singelton = new SingeltonExample();
             singelton.Example(container);
 
-            TransientExample transient = new TransientExample();
+            var transient = new TransientExample();
             transient.Example(container);
 
-            StartableExample startable = new StartableExample();
+            var startable = new StartableExample();
             startable.Example();
 
-            TypedFactoryExample factory = new TypedFactoryExample();
+            var factory = new TypedFactoryExample();
             factory.Example(container);
 
             container.Dispose();

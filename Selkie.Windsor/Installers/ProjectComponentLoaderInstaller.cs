@@ -11,10 +11,11 @@ namespace Selkie.Windsor.Installers
         public void Install([NotNull] IWindsorContainer container,
                             [NotNull] IConfigurationStore store)
         {
-            ILogger logger = container.Resolve <ILogger>();
+            var logger = container.Resolve <ILogger>();
 
             // ReSharper disable MaximumChainedReferences
-            container.Register(Component.For <IProjectComponentLoader>()
+            container.Register(
+                               Component.For <IProjectComponentLoader>()
                                         .UsingFactoryMethod(() => ProjectComponentLoaderBuilder.CreateLoader(logger))
                                         .LifestyleTransient());
             // ReSharper restore MaximumChainedReferences

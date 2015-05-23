@@ -14,10 +14,10 @@ namespace Selkie.Windsor.Example
         {
             Console.WriteLine("Transient example...");
 
-            ITransientTest one = container.Resolve <ITransientTest>();
+            var one = container.Resolve <ITransientTest>();
             Console.WriteLine("Resolved 'ITransientTest' the first time...");
 
-            ITransientTest two = container.Resolve <ITransientTest>();
+            var two = container.Resolve <ITransientTest>();
             Console.WriteLine("Resolved 'ITransientTest' the second time...");
 
             Console.WriteLine("one == two are the same? {0}",

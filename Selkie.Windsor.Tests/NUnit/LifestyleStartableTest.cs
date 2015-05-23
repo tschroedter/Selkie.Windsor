@@ -10,8 +10,6 @@ namespace Selkie.Windsor.Tests.NUnit
     //ncrunch: no coverage start
     internal sealed class LifestyleStartableTest
     {
-        private WindsorContainer m_Container;
-
         [SetUp]
         public void Setup()
         {
@@ -26,6 +24,8 @@ namespace Selkie.Windsor.Tests.NUnit
         {
             m_Container.Dispose();
         }
+
+        private WindsorContainer m_Container;
     }
 
     //ncrunch: no coverage end

@@ -45,11 +45,11 @@ namespace Selkie.Windsor
             // todo maybe there is a way to log which factories are discovered/registered
             m_Logger.Info("{0}: ITypedFactory...".Inject(assembly.ManifestModule.Name));
             container.Install()
-                     .Register(Types.FromAssembly(assembly)
+                     .Register(
+                               Types.FromAssembly(assembly)
                                     .BasedOn <ITypedFactory>()
                                     .If(IsNotUnitTest)
-                                    .Configure(c => c.AsFactory()
-                                                     .LifestyleTransient()));
+                                    .Configure(c => c.AsFactory().LifestyleTransient()));
         }
 
         private void InstallLifestyleStartable(IWindsorContainer container,
@@ -57,7 +57,8 @@ namespace Selkie.Windsor
         {
             m_Logger.Info("{0}: LifestyleStartable...".Inject(assembly.ManifestModule.Name));
             container.Install()
-                     .Register(Classes.FromAssembly(assembly)
+                     .Register(
+                               Classes.FromAssembly(assembly)
                                       .Where(LifestyleStartable)
                                       .WithServiceDefaultInterfaces()
                                       .LifestyleSingleton());
@@ -68,7 +69,8 @@ namespace Selkie.Windsor
         {
             m_Logger.Info("{0}: LifestyleTransient...".Inject(assembly.ManifestModule.Name));
             container.Install()
-                     .Register(Classes.FromAssembly(assembly)
+                     .Register(
+                               Classes.FromAssembly(assembly)
                                       .Where(LifestyleTransient)
                                       .WithServiceDefaultInterfaces()
                                       .LifestyleTransient());
@@ -79,7 +81,8 @@ namespace Selkie.Windsor
         {
             m_Logger.Info("{0}: LifestyleSingelton...".Inject(assembly.ManifestModule.Name));
             container.Install()
-                     .Register(Classes.FromAssembly(assembly)
+                     .Register(
+                               Classes.FromAssembly(assembly)
                                       .Where(LifestyleSingelton)
                                       .WithServiceDefaultInterfaces()
                                       .LifestyleSingleton());
@@ -100,8 +103,7 @@ namespace Selkie.Windsor
 
             ProjectComponentAttribute[] attributes = GetProjectComponentAttributes(type);
 
-            ProjectComponentAttribute[] selected = attributes.Where(isLifestyle)
-                                                             .ToArray();
+            ProjectComponentAttribute[] selected = attributes.Where(isLifestyle).ToArray();
 
             LogAttributes(type,
                           selected);
@@ -131,9 +133,10 @@ namespace Selkie.Windsor
         {
             object[] customAttributes = type.GetCustomAttributes(false);
 
-            ProjectComponentAttribute[] projectComponentAttributes = customAttributes.Select(customAttribute => customAttribute as ProjectComponentAttribute)
-                                                                                     .Where(x => x != null)
-                                                                                     .ToArray();
+            ProjectComponentAttribute[] projectComponentAttributes =
+                customAttributes.Select(customAttribute => customAttribute as ProjectComponentAttribute)
+                                .Where(x => x != null)
+                                .ToArray();
 
             return projectComponentAttributes;
         }
@@ -153,7 +156,7 @@ namespace Selkie.Windsor
                 return;
             }
 
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
             foreach ( ProjectComponentAttribute customAttribute in attributes )
             {

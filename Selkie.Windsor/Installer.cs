@@ -20,11 +20,11 @@ namespace Selkie.Windsor
             container.AddFacility <TypedFactoryFacility>();
             container.AddFacility <StartableFacility>();
 
-            LoggerInstaller loggerInstaller = new LoggerInstaller();
+            var loggerInstaller = new LoggerInstaller();
             loggerInstaller.Install(container,
                                     store);
 
-            ProjectComponentLoaderInstaller loaderInstaller = new ProjectComponentLoaderInstaller();
+            var loaderInstaller = new ProjectComponentLoaderInstaller();
             loaderInstaller.Install(container,
                                     store);
         }

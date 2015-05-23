@@ -12,12 +12,6 @@ namespace Selkie.Windsor.Tests.NUnit
     //ncrunch: no coverage start
     internal sealed class BaseInstallerTests
     {
-        private IWindsorContainer m_Container;
-        private Assembly m_ExecutingAssembly;
-        private TestBaseInstaller m_Installer;
-        private IProjectComponentLoader m_Loader;
-        private IConfigurationStore m_Store;
-
         [SetUp]
         public void Setup()
         {
@@ -26,8 +20,7 @@ namespace Selkie.Windsor.Tests.NUnit
             m_Container = Substitute.For <IWindsorContainer>();
             m_Store = Substitute.For <IConfigurationStore>();
 
-            m_Container.Resolve <IProjectComponentLoader>()
-                       .Returns(m_Loader);
+            m_Container.Resolve <IProjectComponentLoader>().Returns(m_Loader);
 
             m_ExecutingAssembly = Assembly.GetAssembly(typeof ( TestBaseInstaller ));
 
@@ -37,19 +30,11 @@ namespace Selkie.Windsor.Tests.NUnit
                                 m_Store);
         }
 
-        [Test]
-        public void InstallCallsLoadTest()
-        {
-            m_Loader.Received()
-                    .Load(m_Container,
-                          m_ExecutingAssembly);
-        }
-
-        [Test]
-        public void InstallComponentsWasCalledTest()
-        {
-            Assert.True(m_Installer.WasCalledInstallComponents);
-        }
+        private IWindsorContainer m_Container;
+        private Assembly m_ExecutingAssembly;
+        private TestBaseInstaller m_Installer;
+        private IProjectComponentLoader m_Loader;
+        private IConfigurationStore m_Store;
 
         private class TestBaseInstaller : BaseInstaller <TestBaseInstaller>
         {
@@ -63,6 +48,19 @@ namespace Selkie.Windsor.Tests.NUnit
 
                 WasCalledInstallComponents = true;
             }
+        }
+
+        [Test]
+        public void InstallCallsLoadTest()
+        {
+            m_Loader.Received().Load(m_Container,
+                                     m_ExecutingAssembly);
+        }
+
+        [Test]
+        public void InstallComponentsWasCalledTest()
+        {
+            Assert.True(m_Installer.WasCalledInstallComponents);
         }
     }
 

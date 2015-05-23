@@ -7,8 +7,9 @@ namespace Selkie.Windsor.Tests.Library
     [ExcludeFromCodeCoverage]
     //ncrunch: no coverage start
     [ProjectComponent(Lifestyle.Startable)]
-    public class StartableTest : IStartableTest,
-                                 IStartable
+    public class StartableTest
+        : IStartableTest,
+          IStartable
     {
         public void Start()
         {

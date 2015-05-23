@@ -14,7 +14,7 @@ namespace Selkie.Windsor.Example
         {
             Console.WriteLine("TypedFactoryTest example...");
 
-            ITypedFactoryTest factory = container.Resolve <ITypedFactoryTest>();
+            var factory = container.Resolve <ITypedFactoryTest>();
 
             ITransientTest one = factory.Create();
             Console.WriteLine("Created 'ITransientTest' the first time...");

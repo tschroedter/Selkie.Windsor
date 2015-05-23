@@ -18,9 +18,7 @@ namespace Selkie.Windsor
         public void Install([NotNull] IWindsorContainer container,
                             [NotNull] IConfigurationStore store)
         {
-            IEnumerable <Assembly> allAssemblies = AllAssembly()
-                .OrderBy(x => x.FullName)
-                .ToArray();
+            IEnumerable <Assembly> allAssemblies = AllAssembly().OrderBy(x => x.FullName).ToArray();
 
             DisplayAssemblies(allAssemblies);
 
@@ -32,9 +30,6 @@ namespace Selkie.Windsor
                 CallAssemblyInstaller(container,
                                       assembly);
             }
-
-            InstallComponents(container,
-                              store);
         }
 
         private static void DisplayAssemblies(IEnumerable <Assembly> all)
@@ -55,10 +50,15 @@ namespace Selkie.Windsor
             return assembly;
         }
 
-        private static bool IsSelkieWindsorAssembly([NotNull] Assembly assembly)
+        private bool IsSelkieWindsorAssembly([NotNull] Assembly assembly)
         {
             string name = assembly.ManifestModule.Name;
 
+            return IsSelkieWindsorAssemblyName(name);
+        }
+
+        private bool IsSelkieWindsorAssemblyName(string name)
+        {
             return string.Compare(name,
                                   "Selkie.Windsor.dll",
                                   StringComparison.CurrentCultureIgnoreCase) == 0;
@@ -74,11 +74,12 @@ namespace Selkie.Windsor
         {
             string name = assembly.ManifestModule.Name;
 
-            if ( name.Contains("Console") ||
-                 name.Contains("SpecFlow") ||
-                 IsSelkieWindsorAssembly(assembly) )
+            Console.WriteLine("{0} - Checking...",
+                              name);
+
+            if ( IsIgnoredAssemblyName(name) )
             {
-                Console.WriteLine("Installer ignored assembly: {0}",
+                Console.WriteLine("{0} - Ignored!",
                                   name);
 
                 return;
@@ -87,22 +88,31 @@ namespace Selkie.Windsor
             if ( name.StartsWith("Selkie.",
                                  StringComparison.Ordinal) )
             {
-                Console.WriteLine("Installer runs installer for assembly: {0}",
+                Console.WriteLine("{0} - Processing...",
                                   name);
 
                 container.Install(FromAssembly.Instance(assembly));
             }
         }
 
+        private bool IsIgnoredAssemblyName(string name)
+        {
+            return name.IndexOf("Console",
+                                StringComparison.InvariantCultureIgnoreCase) >= 0 || name.IndexOf("SpecFlow",
+                                                                                                  StringComparison
+                                                                                                      .InvariantCultureIgnoreCase) >=
+                   0 || IsSelkieWindsorAssemblyName(name);
+        }
+
         [NotNull]
         private IEnumerable <Assembly> AllAssembly()
         {
             // todo use .AssemblyResolved event and hook up installers ad that point
-            List <Assembly> allAssembly = new List <Assembly>();
+            var allAssembly = new List <Assembly>();
 
             string directory = AppDomain.CurrentDomain.BaseDirectory;
 
-            DirectoryInfo directoryrInfo = new DirectoryInfo(directory);
+            var directoryrInfo = new DirectoryInfo(directory);
 
             FileInfo[] dlls = directoryrInfo.GetFiles("*.dll");
 
@@ -135,7 +145,8 @@ namespace Selkie.Windsor
 
         private static bool IsIgnored([NotNull] FileInfo dllInfo)
         {
-            return dllInfo.Name.StartsWith("NSubstitute") || dllInfo.Name.StartsWith("NLog") || dllInfo.Name.StartsWith("NUnit") || dllInfo.Name.StartsWith("XUnit");
+            return dllInfo.Name.StartsWith("NSubstitute") || dllInfo.Name.StartsWith("NLog") ||
+                   dllInfo.Name.StartsWith("NUnit") || dllInfo.Name.StartsWith("XUnit");
         }
     }
 

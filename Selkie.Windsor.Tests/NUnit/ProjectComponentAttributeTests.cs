@@ -8,15 +8,15 @@ namespace Selkie.Windsor.Tests.NUnit
     //ncrunch: no coverage start
     internal sealed class ProjectComponentAttributeTests
     {
-        private ProjectComponentAttribute m_Singelton;
-        private ProjectComponentAttribute m_Transient;
-
         [SetUp]
         public void Setup()
         {
             m_Transient = new ProjectComponentAttribute(Lifestyle.Transient);
             m_Singelton = new ProjectComponentAttribute();
         }
+
+        private ProjectComponentAttribute m_Singelton;
+        private ProjectComponentAttribute m_Transient;
 
         [Test]
         public void SingeltonLifestyleTest()
@@ -28,8 +28,7 @@ namespace Selkie.Windsor.Tests.NUnit
         [Test]
         public void SingeltonNameTest()
         {
-            Assert.AreEqual(m_Singelton.GetType()
-                                       .FullName,
+            Assert.AreEqual(m_Singelton.GetType().FullName,
                             m_Singelton.Name);
         }
 
@@ -43,8 +42,7 @@ namespace Selkie.Windsor.Tests.NUnit
         [Test]
         public void TransientNameTest()
         {
-            Assert.AreEqual(m_Transient.GetType()
-                                       .FullName,
+            Assert.AreEqual(m_Transient.GetType().FullName,
                             m_Transient.Name);
         }
     }

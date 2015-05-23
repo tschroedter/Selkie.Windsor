@@ -9,10 +9,6 @@ namespace Selkie.Windsor.Tests.NUnit
     //ncrunch: no coverage start
     internal sealed class LifestyleSingletonTest
     {
-        private WindsorContainer m_Container;
-        private ISingeltonTest m_One;
-        private ISingeltonTest m_Two;
-
         [SetUp]
         public void Setup()
         {
@@ -31,12 +27,9 @@ namespace Selkie.Windsor.Tests.NUnit
             m_Container.Dispose();
         }
 
-        [Test]
-        public void CallingResolveShouldReturnOnlyOneInstanceTest()
-        {
-            Assert.AreEqual(m_One,
-                            m_Two);
-        }
+        private WindsorContainer m_Container;
+        private ISingeltonTest m_One;
+        private ISingeltonTest m_Two;
 
         [Test]
         public void AddingTest()
@@ -45,6 +38,13 @@ namespace Selkie.Windsor.Tests.NUnit
 
             Assert.AreEqual(m_One.SomeInteger,
                             m_Two.SomeInteger);
+        }
+
+        [Test]
+        public void CallingResolveShouldReturnOnlyOneInstanceTest()
+        {
+            Assert.AreEqual(m_One,
+                            m_Two);
         }
     }
 

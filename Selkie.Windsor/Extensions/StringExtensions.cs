@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using JetBrains.Annotations;
 
 namespace Selkie.Windsor.Extensions
@@ -11,7 +10,7 @@ namespace Selkie.Windsor.Extensions
         public static string Inject([NotNull] this string format,
                                     [NotNull] params object[] arguments)
         {
-            return String.Format(CultureInfo.CurrentCulture,
+            return string.Format(CultureInfo.CurrentCulture,
                                  format,
                                  arguments);
         }

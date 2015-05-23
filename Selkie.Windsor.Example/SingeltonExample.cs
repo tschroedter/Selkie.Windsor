@@ -14,10 +14,10 @@ namespace Selkie.Windsor.Example
         {
             Console.WriteLine("Singelton example...");
 
-            ISingeltonTest one = container.Resolve <ISingeltonTest>();
+            var one = container.Resolve <ISingeltonTest>();
             Console.WriteLine("Resolved 'ISingeltonTest' the first time...");
 
-            ISingeltonTest two = container.Resolve <ISingeltonTest>();
+            var two = container.Resolve <ISingeltonTest>();
             Console.WriteLine("Resolved 'ISingeltonTest' the second time...");
 
             Console.WriteLine("one == two are the same? {0}",

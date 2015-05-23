@@ -2,8 +2,9 @@
 
 namespace Selkie.Windsor.Example
 {
-    public class Installer : BasicConsoleInstaller,
-                             IWindsorInstaller
+    public class Installer
+        : BasicConsoleInstaller,
+          IWindsorInstaller
     {
     }
 }
