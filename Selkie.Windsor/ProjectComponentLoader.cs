@@ -42,13 +42,12 @@ namespace Selkie.Windsor
         private void InstallITypedFactory(IWindsorContainer container,
                                           Assembly assembly)
         {
-            // todo maybe there is a way to log which factories are discovered/registered
             m_Logger.Info("{0}: ITypedFactory...".Inject(assembly.ManifestModule.Name));
             container.Install()
                      .Register(
                                Types.FromAssembly(assembly)
                                     .BasedOn <ITypedFactory>()
-                                    .If(IsNotUnitTest)
+                                    .If(IsNotUnitTestTypedFactory)
                                     .Configure(c => c.AsFactory().LifestyleTransient()));
         }
 
@@ -88,9 +87,18 @@ namespace Selkie.Windsor
                                       .LifestyleSingleton());
         }
 
-        private static bool IsNotUnitTest(Type c)
+        private bool IsNotUnitTestTypedFactory(Type type)
         {
-            return !c.FullName.Contains("NUnit") && !c.FullName.Contains("XUnit");
+            bool isUnitTest = type.FullName.Contains("NUnit") ||
+                              type.FullName.Contains("XUnit");
+
+            if (!isUnitTest)
+            {
+                LogTypeAndLifestyle(type.FullName,
+                                    "ITypedFactory");
+            }
+
+            return !isUnitTest;
         }
 
         protected bool IsLifestyle([NotNull] Type type,
@@ -166,8 +174,15 @@ namespace Selkie.Windsor
                 builder.Append("{0} ".Inject(attribute.Lifestyle));
             }
 
-            m_Logger.Info("{0} has the following Lifestyle: {1}".Inject(type.FullName,
-                                                                        builder));
+            LogTypeAndLifestyle(type.FullName,
+                                builder.ToString());
+        }
+
+        private void LogTypeAndLifestyle(string type,
+                                         string lifestyle)
+        {
+            m_Logger.Info("{0} has the following Lifestyle: {1}".Inject(type,
+                                                                        lifestyle));
         }
 
         // ReSharper disable once CodeAnnotationAnalyzer
