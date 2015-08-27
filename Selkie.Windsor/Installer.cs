@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Castle.Facilities.Startable;
 using Castle.Facilities.TypedFactory;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Selkie.Windsor.Installers;
@@ -19,6 +20,9 @@ namespace Selkie.Windsor
 
             container.AddFacility <TypedFactoryFacility>();
             container.AddFacility <StartableFacility>();
+
+            container.Kernel.Resolver
+                     .AddSubResolver(new ArrayResolver(container.Kernel));
 
             var loggerInstaller = new LoggerInstaller();
             loggerInstaller.Install(container,

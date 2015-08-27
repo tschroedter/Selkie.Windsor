@@ -70,6 +70,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="NUnit\BaseInstallerTests.cs" />
     <Compile Include="NUnit\LifestyleStartableTest.cs" />
+    <Compile Include="NUnit\SelkieLoggerTests.cs" />
     <Compile Include="NUnit\TypedFactoryTest.cs" />
     <Compile Include="NUnit\LifestyleTransientTest.cs" />
     <Compile Include="NUnit\LifestyleSingletonTest.cs" />

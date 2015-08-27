@@ -26,6 +26,10 @@ namespace Selkie.Windsor.Example
             var factory = new TypedFactoryExample();
             factory.Example(container);
 
+            var logger = container.Resolve <ISelkieLogger>();
+            logger.Info("Hello World!");
+            container.Release(logger);
+
             container.Dispose();
 
             Console.ReadLine();
