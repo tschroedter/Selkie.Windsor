@@ -40,6 +40,11 @@ namespace Selkie.Windsor.Tests.NUnit
         {
             public bool WasCalledInstallComponents { get; private set; }
 
+            public override string GetPrefixOfDllsToInstall()
+            {
+                return "Selkie.";
+            }
+
             protected override void InstallComponents(IWindsorContainer container,
                                                       IConfigurationStore store)
             {

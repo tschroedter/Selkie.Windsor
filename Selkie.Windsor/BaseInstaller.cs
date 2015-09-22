@@ -17,15 +17,32 @@ namespace Selkie.Windsor
 
             Assembly assembly = GetAssembly();
 
+            LoadFromAssembly(container,
+                             assembly);
+
+            InstallComponents(container,
+                              store);
+        }
+
+        [NotNull]
+        public abstract string GetPrefixOfDllsToInstall();
+
+        private void LoadFromAssembly(IWindsorContainer container,
+                                      Assembly assembly)
+        {
+            string name = assembly.ManifestModule.Name;
+
+            if ( !name.StartsWith(GetPrefixOfDllsToInstall()) )
+            {
+                return;
+            }
+
             var loader = container.Resolve <IProjectComponentLoader>();
 
             loader.Load(container,
                         assembly);
 
             container.Release(loader);
-
-            InstallComponents(container,
-                              store);
         }
 
         protected virtual void PreInstallComponents([NotNull] IWindsorContainer container,

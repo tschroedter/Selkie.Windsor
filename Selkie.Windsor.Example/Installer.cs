@@ -6,5 +6,9 @@ namespace Selkie.Windsor.Example
         : BasicConsoleInstaller,
           IWindsorInstaller
     {
+        public override string GetPrefixOfDllsToInstall()
+        {
+            return "Selkie.";
+        }
     }
 }

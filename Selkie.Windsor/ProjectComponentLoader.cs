@@ -92,7 +92,7 @@ namespace Selkie.Windsor
             bool isUnitTest = type.FullName.Contains("NUnit") ||
                               type.FullName.Contains("XUnit");
 
-            if (!isUnitTest)
+            if ( !isUnitTest )
             {
                 LogTypeAndLifestyle(type.FullName,
                                     "ITypedFactory");
@@ -104,11 +104,6 @@ namespace Selkie.Windsor
         protected bool IsLifestyle([NotNull] Type type,
                                    Func <ProjectComponentAttribute, bool> isLifestyle)
         {
-            if ( IsExcludedNamespace(type) )
-            {
-                return false;
-            }
-
             ProjectComponentAttribute[] attributes = GetProjectComponentAttributes(type);
 
             ProjectComponentAttribute[] selected = attributes.Where(isLifestyle).ToArray();
@@ -147,13 +142,6 @@ namespace Selkie.Windsor
                                 .ToArray();
 
             return projectComponentAttributes;
-        }
-
-        private static bool IsExcludedNamespace([NotNull] Type type)
-        {
-            string fullName = type.FullName;
-
-            return !fullName.StartsWith("Selkie.");
         }
 
         private void LogAttributes([NotNull] Type type,
