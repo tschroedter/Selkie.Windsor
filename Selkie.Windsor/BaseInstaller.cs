@@ -24,7 +24,7 @@ namespace Selkie.Windsor
                               store);
         }
 
-        [NotNull]
+        [NotNull] // todo change method to return bool: bool InstallDllWithName(string currentName);
         public abstract string GetPrefixOfDllsToInstall();
 
         private void LoadFromAssembly(IWindsorContainer container,
