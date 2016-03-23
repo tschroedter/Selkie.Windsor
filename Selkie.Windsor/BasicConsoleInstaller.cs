@@ -4,11 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Castle.Core.Logging;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using JetBrains.Annotations;
+using NLog;
 using Selkie.Windsor.Extensions;
 
 namespace Selkie.Windsor
@@ -17,6 +17,10 @@ namespace Selkie.Windsor
     //ncrunch: no coverage start
     public abstract class BasicConsoleInstaller
     {
+        private const string PrefixForSelkieDlls = "Selkie.";
+
+        private readonly Logger m_Logger = LogManager.GetLogger("Selkie.Windsor.BasicConsoleInstaller");
+
         [NotNull]
         public abstract string GetPrefixOfDllsToInstall();
 
@@ -30,34 +34,25 @@ namespace Selkie.Windsor
             container.Install(FromAssembly.Instance(selkieWindsor)); // need to install first, other depend on it
             allAssemblies = allAssemblies.Where(x => !IsSelkieWindsorAssembly(x));
 
-            var logger = container.Resolve <ILogger>();
-
-            DisplayAssemblies(allAssemblies,
-                              logger);
+            DisplayAssemblies(allAssemblies);
 
             CallInstallerForAllAssemblies(container,
-                                          allAssemblies,
-                                          logger);
-
-            container.Release(logger);
+                                          allAssemblies);
         }
 
-        private void CallInstallerForAllAssemblies(IWindsorContainer container,
-                                                   IEnumerable <Assembly> allAssemblies,
-                                                   ILogger logger)
+        private void CallInstallerForAllAssemblies([NotNull] IWindsorContainer container,
+                                                   [NotNull] IEnumerable <Assembly> allAssemblies)
         {
             foreach ( Assembly assembly in allAssemblies )
             {
                 CallAssemblyInstaller(container,
-                                      assembly,
-                                      logger);
+                                      assembly);
             }
         }
 
-        private static void DisplayAssemblies(IEnumerable <Assembly> all,
-                                              ILogger logger)
+        private void DisplayAssemblies(IEnumerable <Assembly> all)
         {
-            logger.Info("Running installers for the following assemblies:");
+            m_Logger.Info("Running installers for the following assemblies:");
 
             foreach ( Assembly assembly in all )
             {
@@ -93,12 +88,11 @@ namespace Selkie.Windsor
         }
 
         private void CallAssemblyInstaller([NotNull] IWindsorContainer container,
-                                           [NotNull] Assembly assembly,
-                                           [NotNull] ILogger logger)
+                                           [NotNull] Assembly assembly)
         {
             string name = assembly.ManifestModule.Name;
 
-            logger.Info("{0} - Checking...".Inject(name));
+            m_Logger.Info("{0} - Checking...".Inject(name));
 
             if ( IsIgnoredAssemblyName(name) )
             {
@@ -111,7 +105,7 @@ namespace Selkie.Windsor
             if ( name.StartsWith(GetPrefixOfDllsToInstall(),
                                  StringComparison.Ordinal) )
             {
-                logger.Info("{0} - Processing...".Inject(name));
+                m_Logger.Info("{0} - Processing...".Inject(name));
 
                 container.Install(FromAssembly.Instance(assembly));
             }
@@ -128,14 +122,13 @@ namespace Selkie.Windsor
             return name.IndexOf("Console",
                                 StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                    name.IndexOf("SpecFlow",
-                                StringComparison
-                                    .InvariantCultureIgnoreCase) >= 0;
+                                StringComparison.InvariantCultureIgnoreCase) >= 0;
         }
 
         [NotNull]
         private IEnumerable <Assembly> AllAssembly()
         {
-            // todo use .AssemblyResolved event and hook up installers ad that point
+            // todo use .AssemblyResolved event andd hook up installers ad that point
             var allAssembly = new List <Assembly>();
 
             string directory = AppDomain.CurrentDomain.BaseDirectory;
@@ -150,31 +143,60 @@ namespace Selkie.Windsor
             return allAssembly;
         }
 
-        private static void AddDllsToAssemblyList([NotNull] IEnumerable <FileInfo> dlls,
-                                                  [NotNull] ICollection <Assembly> allAssembly)
+        private void AddDllsToAssemblyList([NotNull] IEnumerable <FileInfo> dlls,
+                                           [NotNull] ICollection <Assembly> allAssembly)
         {
-            foreach ( FileInfo dllInfo in dlls )
+            foreach ( FileInfo fileInfo in dlls )
             {
-                if ( IsIgnored(dllInfo) )
+                m_Logger.Debug("Trying to load assembly for DLL {0}...".Inject(fileInfo.FullName));
+
+                if ( IsFilenameIgnored(fileInfo.Name) )
                 {
                     continue;
                 }
 
-                AssemblyName assemblyName = AssemblyName.GetAssemblyName(dllInfo.Name);
-
-                if ( assemblyName.Name != dllInfo.Name )
+                try
                 {
-                    Assembly assm = Assembly.Load(assemblyName);
+                    Assembly assembly = FindAssembly(fileInfo.FullName);
 
-                    allAssembly.Add(assm);
+                    allAssembly.Add(assembly);
+                }
+                catch ( Exception exception )
+                {
+                    string message = "Could not get assembly for DLL '{0}'!".Inject(fileInfo.FullName);
+
+                    m_Logger.Error(exception,
+                                   message);
+
+                    throw;
                 }
             }
         }
 
-        private static bool IsIgnored([NotNull] FileInfo dllInfo)
+        private Assembly FindAssembly([NotNull] string fullname)
         {
-            return dllInfo.Name.StartsWith("NSubstitute") || dllInfo.Name.StartsWith("NLog") ||
-                   dllInfo.Name.StartsWith("NUnit") || dllInfo.Name.StartsWith("XUnit");
+            AssemblyName assemblyName = AssemblyName.GetAssemblyName(fullname);
+            m_Logger.Debug("Found AssemblyName {0}...".Inject(assemblyName.FullName));
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            m_Logger.Debug("...loaded assembly {0}!".Inject(assembly.FullName));
+
+            return assembly;
+        }
+
+        private bool IsFilenameIgnored([NotNull] string filename)
+        {
+            bool isFileIgnored = !filename.StartsWith(PrefixForSelkieDlls) &&
+                                 !filename.StartsWith(GetPrefixOfDllsToInstall());
+
+            if ( isFileIgnored )
+            {
+                m_Logger.Debug("...{0} ".Inject(filename) +
+                               "was ignored because of fixed prefix '{0}' or ".Inject(PrefixForSelkieDlls) +
+                               "custom prefix '{0}'!".Inject(GetPrefixOfDllsToInstall()));
+            }
+
+            return isFileIgnored;
         }
     }
 
