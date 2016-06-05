@@ -27,6 +27,22 @@ namespace Selkie.Windsor
         [NotNull] // todo change method to return bool: bool InstallDllWithName(string currentName);
         public abstract string GetPrefixOfDllsToInstall();
 
+        protected virtual void InstallComponents([NotNull] IWindsorContainer container,
+                                                 [NotNull] IConfigurationStore store)
+        {
+        }
+
+        protected virtual void PreInstallComponents([NotNull] IWindsorContainer container,
+                                                    [NotNull] IConfigurationStore store)
+        {
+        }
+
+        [NotNull]
+        internal Assembly GetAssembly()
+        {
+            return Assembly.GetAssembly(typeof( T ));
+        }
+
         private void LoadFromAssembly(IWindsorContainer container,
                                       Assembly assembly)
         {
@@ -43,22 +59,6 @@ namespace Selkie.Windsor
                         assembly);
 
             container.Release(loader);
-        }
-
-        protected virtual void PreInstallComponents([NotNull] IWindsorContainer container,
-                                                    [NotNull] IConfigurationStore store)
-        {
-        }
-
-        [NotNull]
-        internal Assembly GetAssembly()
-        {
-            return Assembly.GetAssembly(typeof ( T ));
-        }
-
-        protected virtual void InstallComponents([NotNull] IWindsorContainer container,
-                                                 [NotNull] IConfigurationStore store)
-        {
         }
     }
 }

@@ -69,16 +69,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\NUnit\StringExtensionsTests.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NUnit\BaseInstallerTests.cs" />
-    <Compile Include="NUnit\LifestyleStartableTest.cs" />
-    <Compile Include="NUnit\SelkieLoggerTests.cs" />
-    <Compile Include="NUnit\TypedFactoryTest.cs" />
-    <Compile Include="NUnit\LifestyleTransientTest.cs" />
-    <Compile Include="NUnit\LifestyleSingletonTest.cs" />
-    <Compile Include="NUnit\LifestyleTests.cs" />
-    <Compile Include="NUnit\ProjectComponentAttributeTests.cs" />
+    <Compile Include="BaseInstallerTests.cs" />
+    <Compile Include="LifestyleStartableTest.cs" />
+    <Compile Include="SelkieLoggerTests.cs" />
+    <Compile Include="TypedFactoryTest.cs" />
+    <Compile Include="LifestyleTransientTest.cs" />
+    <Compile Include="LifestyleSingletonTest.cs" />
+    <Compile Include="LifestyleTests.cs" />
+    <Compile Include="ProjectComponentAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

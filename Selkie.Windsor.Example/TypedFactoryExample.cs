@@ -7,7 +7,6 @@ using Selkie.Windsor.Examples.Library;
 namespace Selkie.Windsor.Example
 {
     [ExcludeFromCodeCoverage]
-    //ncrunch: no coverage start
     public class TypedFactoryExample
     {
         public void Example([NotNull] IWindsorContainer container)
@@ -39,6 +38,4 @@ namespace Selkie.Windsor.Example
             container.Release(factory);
         }
     }
-
-    //ncrunch: no coverage end
 }

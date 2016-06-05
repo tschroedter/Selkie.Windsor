@@ -6,7 +6,6 @@ using Castle.Windsor.Installer;
 namespace Selkie.Windsor.Example
 {
     [ExcludeFromCodeCoverage]
-    //ncrunch: no coverage start
     internal class Program
     {
         private static void Main()
@@ -35,6 +34,4 @@ namespace Selkie.Windsor.Example
             Console.ReadLine();
         }
     }
-
-    //ncrunch: no coverage end
 }

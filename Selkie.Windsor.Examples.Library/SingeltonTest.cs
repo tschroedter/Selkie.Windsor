@@ -3,7 +3,6 @@
 namespace Selkie.Windsor.Examples.Library
 {
     [ExcludeFromCodeCoverage]
-    //ncrunch: no coverage start
     [ProjectComponent(Lifestyle.Singleton)]
     public class SingeltonTest : ISingeltonTest
     {
@@ -14,6 +13,4 @@ namespace Selkie.Windsor.Examples.Library
     {
         int SomeInteger { get; set; }
     }
-
-    //ncrunch: no coverage end
 }

@@ -5,7 +5,6 @@ using Castle.Core;
 namespace Selkie.Windsor.Tests.Library
 {
     [ExcludeFromCodeCoverage]
-    //ncrunch: no coverage start
     [ProjectComponent(Lifestyle.Startable)]
     public class StartableTest
         : IStartableTest,
@@ -25,6 +24,4 @@ namespace Selkie.Windsor.Tests.Library
     public interface IStartableTest
     {
     }
-
-    //ncrunch: no coverage end
 }

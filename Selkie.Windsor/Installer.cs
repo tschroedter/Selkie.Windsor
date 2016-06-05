@@ -10,7 +10,6 @@ using Selkie.Windsor.Installers;
 namespace Selkie.Windsor
 {
     [ExcludeFromCodeCoverage]
-    //ncrunch: no coverage start
     public class Installer : BaseInstaller <Installer>
     {
         public override string GetPrefixOfDllsToInstall()
@@ -34,6 +33,33 @@ namespace Selkie.Windsor
             var loaderInstaller = new ProjectComponentLoaderInstaller();
             loaderInstaller.Install(container,
                                     store);
+        }
+
+        private static void CheakAndAddArrayResolver(IWindsorContainer container)
+        {
+            if ( !container.Kernel.HasComponent(typeof( ArrayResolver )) )
+            {
+                container.Kernel.Resolver
+                         .AddSubResolver(new ArrayResolver(container.Kernel));
+            }
+        }
+
+        private static void CheakAndAddCollectionResolver(IWindsorContainer container)
+        {
+            if ( !container.Kernel.HasComponent(typeof( CollectionResolver )) )
+            {
+                container.Kernel.Resolver
+                         .AddSubResolver(new CollectionResolver(container.Kernel));
+            }
+        }
+
+        private static void CheakAndAddListResolver(IWindsorContainer container)
+        {
+            if ( !container.Kernel.HasComponent(typeof( ListResolver )) )
+            {
+                container.Kernel.Resolver
+                         .AddSubResolver(new ListResolver(container.Kernel));
+            }
         }
 
         private static void CheckAndAddFacilities(IWindsorContainer container)
@@ -64,34 +90,5 @@ namespace Selkie.Windsor
                 container.AddFacility <TypedFactoryFacility>();
             }
         }
-
-        private static void CheakAndAddCollectionResolver(IWindsorContainer container)
-        {
-            if ( !container.Kernel.HasComponent(typeof ( CollectionResolver )) )
-            {
-                container.Kernel.Resolver
-                         .AddSubResolver(new CollectionResolver(container.Kernel));
-            }
-        }
-
-        private static void CheakAndAddListResolver(IWindsorContainer container)
-        {
-            if ( !container.Kernel.HasComponent(typeof ( ListResolver )) )
-            {
-                container.Kernel.Resolver
-                         .AddSubResolver(new ListResolver(container.Kernel));
-            }
-        }
-
-        private static void CheakAndAddArrayResolver(IWindsorContainer container)
-        {
-            if ( !container.Kernel.HasComponent(typeof ( ArrayResolver )) )
-            {
-                container.Kernel.Resolver
-                         .AddSubResolver(new ArrayResolver(container.Kernel));
-            }
-        }
     }
-
-    //ncrunch: no coverage end
 }

@@ -7,8 +7,6 @@ namespace Selkie.Windsor
         : Attribute,
           IComponentInfo
     {
-        private readonly string m_Name;
-
         public ProjectComponentAttribute()
             : this(Lifestyle.Singleton)
         {
@@ -20,6 +18,8 @@ namespace Selkie.Windsor
             Lifestyle = lifestyle;
             m_Name = GetType().FullName;
         }
+
+        private readonly string m_Name;
 
         public Lifestyle Lifestyle { get; private set; }
 

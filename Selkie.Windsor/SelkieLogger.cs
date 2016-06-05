@@ -7,12 +7,12 @@ namespace Selkie.Windsor
     [ProjectComponent(Lifestyle.Transient)]
     public class SelkieLogger : ISelkieLogger
     {
-        private readonly ILogger m_Logger;
-
         public SelkieLogger([NotNull] ILogger logger)
         {
             m_Logger = logger;
         }
+
+        private readonly ILogger m_Logger;
 
         public void Debug(string message)
         {

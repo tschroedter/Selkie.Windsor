@@ -3,7 +3,6 @@
 namespace Selkie.Windsor.Examples.Library
 {
     [ExcludeFromCodeCoverage]
-    //ncrunch: no coverage start
     [ProjectComponent(Lifestyle.Transient)]
     public class TransientTest : ITransientTest
     {
@@ -14,6 +13,4 @@ namespace Selkie.Windsor.Examples.Library
     {
         int SomeInteger { get; set; }
     }
-
-    //ncrunch: no coverage end
 }
