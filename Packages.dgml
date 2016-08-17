@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="TopToBottom" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Castle.Core 3.3.3" Category="Package" Bounds="430.501666666667,167.88,107.286666666667,25.96" Label="Castle.Core 3.3.3" />
+    <Node Id="Castle.Core-NLog 3.3.3" Category="Package" Bounds="595.74,55.96,140.81,25.96" Label="Castle.Core-NLog 3.3.3" />
+    <Node Id="Castle.LoggingFacility 3.3.0" Category="Package" Bounds="403.321666666667,55.96,161.646666666667,25.96" Label="Castle.LoggingFacility 3.3.0" />
+    <Node Id="Castle.Windsor 3.3.0" Category="Package" Bounds="110.821666666667,111.92,126.646666666667,25.96" Label="Castle.Windsor 3.3.0" />
+    <Node Id="JetBrains.Annotations 10.1.4" Category="Package" Bounds="205.168333333333,55.9600000000002,167.953333333333,25.96" Label="JetBrains.Annotations 10.1.4" />
+    <Node Id="NLog 4.3.6" Category="Package" Bounds="627.835,111.92,76.6199999999999,25.96" Label="NLog 4.3.6" />
+    <Node Id="NSubstitute 1.10.0.0" Category="Package" Bounds="767.196666666667,55.96,125.896666666667,25.96" Label="NSubstitute 1.10.0.0" />
+    <Node Id="NUnit 3.2.1" Category="Package" Bounds="923.705,55.96,78.8800000000001,25.96" Label="NUnit 3.2.1" />
+    <Node Id="Selkie.Windsor" Category="Project" Bounds="413.358333333333,0,97.5733333333333,25.96" Label="Selkie.Windsor" />
+    <Node Id="Selkie.Windsor.Example" Category="Project" Bounds="541.93,0,144.43,25.96" Label="Selkie.Windsor.Example" />
+    <Node Id="Selkie.Windsor.Examples.Library" Category="Project" Bounds="195.148333333333,1.13686837721616E-13,187.993333333333,25.96" Label="Selkie.Windsor.Examples.Library" />
+    <Node Id="Selkie.Windsor.Tests" Category="Project" Bounds="717.235,0,125.82,25.96" Label="Selkie.Windsor.Tests" />
+    <Node Id="Selkie.Windsor.Tests.Library" Category="Project" Bounds="0,1.13686837721616E-13,164.29,25.96" Label="Selkie.Windsor.Tests.Library" />
+  </Nodes>
+  <Links>
+    <Link Source="Castle.Core-NLog 3.3.3" Target="Castle.Core 3.3.3" Category="Package Dependency" Bounds="512.919006347656,81.9199981689453,132.118408203125,81.2455749511719" />
+    <Link Source="Castle.Core-NLog 3.3.3" Target="NLog 4.3.6" Category="Package Dependency" Bounds="666.14501953125,81.9199981689453,0,21" />
+    <Link Source="Castle.LoggingFacility 3.3.0" Target="Castle.Core 3.3.3" Category="Package Dependency" Bounds="484.144989013672,81.9199981689453,0,76.9600067138672" />
+    <Link Source="Castle.LoggingFacility 3.3.0" Target="Castle.Windsor 3.3.0" Category="Package Dependency" Bounds="245.984100341797,81.9199981689453,166.255981445313,30.0118865966797" />
+    <Link Source="Castle.Windsor 3.3.0" Target="Castle.Core 3.3.3" Category="Package Dependency" Bounds="237.127243041992,136.269317626953,184.517562866211,33.3083953857422" />
+    <Link Source="Selkie.Windsor" Target="Castle.Core-NLog 3.3.3" Category="Installed Package" Bounds="508.890045166016,25.8028049468994,101.257476806641,27.7763233184814" />
+    <Link Source="Selkie.Windsor" Target="Castle.LoggingFacility 3.3.0" Category="Installed Package" Bounds="467.247924804688,25.9599990844727,8.501220703125,21.6240386962891" />
+    <Link Source="Selkie.Windsor" Target="JetBrains.Annotations 10.1.4" Category="Installed Package" Bounds="337.835754394531,25.9599990844727,84.181640625,27.2300910949707" />
+    <Link Source="Selkie.Windsor.Example" Target="Castle.Core-NLog 3.3.3" Category="Installed Package" Bounds="626.206481933594,25.9599990844727,21.7506103515625,23.4070434570313" />
+    <Link Source="Selkie.Windsor.Example" Target="Castle.LoggingFacility 3.3.0" Category="Installed Package" Bounds="522.565307617188,25.9599990844727,61.426025390625,26.4415321350098" />
+    <Link Source="Selkie.Windsor.Example" Target="JetBrains.Annotations 10.1.4" Category="Installed Package" Bounds="373.398681640625,25.2345695495605,169.5751953125,29.1982421875" />
+    <Link Source="Selkie.Windsor.Examples.Library" Target="Castle.Windsor 3.3.0" Category="Installed Package" Bounds="174.145004272461,25.9599990844727,88.3255767822266,76.9599990844727" />
+    <Link Source="Selkie.Windsor.Examples.Library" Target="JetBrains.Annotations 10.1.4" Category="Installed Package" Bounds="289.144989013672,25.9599990844727,0,21" />
+    <Link Source="Selkie.Windsor.Tests" Target="Castle.Core-NLog 3.3.3" Category="Installed Package" Bounds="700.666564941406,25.9599990844727,53.0359497070313,26.0341491699219" />
+    <Link Source="Selkie.Windsor.Tests" Target="Castle.LoggingFacility 3.3.0" Category="Installed Package" Bounds="561.645935058594,24.7599639892578,156.189025878906,29.5281639099121" />
+    <Link Source="Selkie.Windsor.Tests" Target="JetBrains.Annotations 10.1.4" Category="Installed Package" Bounds="381.316558837891,24.2617931365967,336.215606689453,31.6695079803467" />
+    <Link Source="Selkie.Windsor.Tests" Target="NSubstitute 1.10.0.0" Category="Installed Package" Bounds="791.742553710938,25.9599990844727,20.808349609375,23.288688659668" />
+    <Link Source="Selkie.Windsor.Tests" Target="NUnit 3.2.1" Category="Installed Package" Bounds="822.592102050781,25.9599990844727,93.1671142578125,28.4897956848145" />
+    <Link Source="Selkie.Windsor.Tests.Library" Target="Castle.Windsor 3.3.0" Category="Installed Package" Bounds="92.8147659301758,25.9599990844727,64.9453811645508,79.0074691772461" />
+    <Link Source="Selkie.Windsor.Tests.Library" Target="JetBrains.Annotations 10.1.4" Category="Installed Package" Bounds="130.158935546875,25.9599990844727,102.283996582031,27.6512718200684" />
+  </Links>
+  <Categories>
+    <Category Id="Installed Package" />
+    <Category Id="Package" />
+    <Category Id="Package Dependency" />
+    <Category Id="Project" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>
