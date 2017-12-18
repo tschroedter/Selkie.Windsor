@@ -9,8 +9,8 @@
     <Authors>Thomas Schroedter</Authors>
     <Company>Thomas Schroedter</Company>
     <PackageLicenseUrl>https://github.com/tschroedter/Selkie.Windsor/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/tschroedter/Selkie.Windsor</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/tschroedter/Selkie.Windsor</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/tschroedter/Selkie.Windsor/tree/netcore2</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tschroedter/Selkie.Windsor/tree/netcore2</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
