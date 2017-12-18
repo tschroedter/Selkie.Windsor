@@ -187,3 +187,4 @@ FakesAssemblies/
 *.ncrunchproject
 NuGet.Selkie.Windsor/lib/
 Selkie.Windsor.sln.DotSettings
+/.vs/Selkie.Windsor/v15/Server/sqlite3

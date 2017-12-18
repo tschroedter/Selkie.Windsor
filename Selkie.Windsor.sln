@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27205.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2.Selkie.Windsor", "Core2.Selkie.Windsor\Core2.Selkie.Windsor.csproj", "{CB74B4CE-38BB-4F27-9C0A-E4A92179BFF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2.Selkie.Windsor.Example", "Core2.Selkie.Windsor.Example\Core2.Selkie.Windsor.Example.csproj", "{632E7224-FC51-4424-BBE7-0779A2CF90C6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2.Selkie.Windsor.Examples.Library", "Core2.Selkie.Windsor.Examples.Library\Core2.Selkie.Windsor.Examples.Library.csproj", "{324936C0-387C-4415-A3EA-15A01706F726}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2.Selkie.Windsor.Tests.Library", "Core2.Selkie.Windsor.Tests.Library\Core2.Selkie.Windsor.Tests.Library.csproj", "{D94000DD-ED7D-4F22-B7DF-9CDD9B8FF810}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CAAF5DB7-2143-45C4-BDD6-F86ACFAD81FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{592E5779-5E5F-4C5F-91CF-A8D18FF56040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2.Selkie.Windsor.Tests", "Core2.Selkie.Windsor.Tests\Core2.Selkie.Windsor.Tests.csproj", "{99294B3D-8782-4178-9025-78156CEF8C9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB74B4CE-38BB-4F27-9C0A-E4A92179BFF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB74B4CE-38BB-4F27-9C0A-E4A92179BFF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB74B4CE-38BB-4F27-9C0A-E4A92179BFF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB74B4CE-38BB-4F27-9C0A-E4A92179BFF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{632E7224-FC51-4424-BBE7-0779A2CF90C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{632E7224-FC51-4424-BBE7-0779A2CF90C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{632E7224-FC51-4424-BBE7-0779A2CF90C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{632E7224-FC51-4424-BBE7-0779A2CF90C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{324936C0-387C-4415-A3EA-15A01706F726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324936C0-387C-4415-A3EA-15A01706F726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324936C0-387C-4415-A3EA-15A01706F726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324936C0-387C-4415-A3EA-15A01706F726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D94000DD-ED7D-4F22-B7DF-9CDD9B8FF810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D94000DD-ED7D-4F22-B7DF-9CDD9B8FF810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D94000DD-ED7D-4F22-B7DF-9CDD9B8FF810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D94000DD-ED7D-4F22-B7DF-9CDD9B8FF810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99294B3D-8782-4178-9025-78156CEF8C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99294B3D-8782-4178-9025-78156CEF8C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99294B3D-8782-4178-9025-78156CEF8C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99294B3D-8782-4178-9025-78156CEF8C9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{632E7224-FC51-4424-BBE7-0779A2CF90C6} = {592E5779-5E5F-4C5F-91CF-A8D18FF56040}
+		{324936C0-387C-4415-A3EA-15A01706F726} = {592E5779-5E5F-4C5F-91CF-A8D18FF56040}
+		{D94000DD-ED7D-4F22-B7DF-9CDD9B8FF810} = {CAAF5DB7-2143-45C4-BDD6-F86ACFAD81FB}
+		{99294B3D-8782-4178-9025-78156CEF8C9F} = {CAAF5DB7-2143-45C4-BDD6-F86ACFAD81FB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B148C41-1828-4DF9-946A-BE8224E5894F}
+	EndGlobalSection
+EndGlobal
