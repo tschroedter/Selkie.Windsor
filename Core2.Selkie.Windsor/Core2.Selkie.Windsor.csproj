@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/tschroedter/Selkie.Windsor/tree/netcore2</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tschroedter/Selkie.Windsor/tree/netcore2</RepositoryUrl>
     <PackageIconUrl>https://github.com/tschroedter/Selkie/blob/master/LaptopDeskPerson.png</PackageIconUrl>
-    <PackageTags>Selkie, Windsor</PackageTags>
+    <PackageTags>Selkie, Windsor, Core2,</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
