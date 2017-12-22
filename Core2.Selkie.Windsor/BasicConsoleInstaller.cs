@@ -15,6 +15,7 @@ namespace Core2.Selkie.Windsor
     [ExcludeFromCodeCoverage]
     public abstract class BasicConsoleInstaller
     {
+        private const string SelkieWindsorDllName = "Core2.Selkie.Windsor.dll";
         private const string PrefixForCore2SelkieDlls = "Core2.Selkie.";
 
         private readonly ConsoleLogger m_Logger = new ConsoleLogger();
@@ -167,7 +168,12 @@ namespace Core2.Selkie.Windsor
         [NotNull]
         private Assembly GetSelkieWindsor([NotNull] IEnumerable <Assembly> all)
         {
-            Assembly assembly = all.First(IsCore2SelkieWindsorAssembly);
+            Assembly assembly = all.FirstOrDefault(IsCore2SelkieWindsorAssembly);
+
+            if (assembly == null)
+            {
+                throw new ArgumentException($"Could not find {SelkieWindsorDllName} in application folder!");
+            }
 
             return assembly;
         }
@@ -182,7 +188,7 @@ namespace Core2.Selkie.Windsor
         private bool IsCore2SelkieWindsorAssemblyName(string name)
         {
             return string.Compare(name,
-                                  "Core2.Selkie.Windsor.dll",
+                                  SelkieWindsorDllName,
                                   StringComparison.CurrentCultureIgnoreCase) == 0;
         }
 
