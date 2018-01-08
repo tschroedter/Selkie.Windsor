@@ -15,32 +15,40 @@ namespace Core2.Selkie.Windsor
     [ExcludeFromCodeCoverage]
     public abstract class BasicConsoleInstaller
     {
-        private const string SelkieWindsorDllName = "Core2.Selkie.Windsor.dll";
-        private const string PrefixForCore2SelkieDlls = "Core2.Selkie.";
+        [UsedImplicitly]
+        protected const string SelkieWindsorDllName = "Core2.Selkie.Windsor.dll";
 
-        private readonly ConsoleLogger m_Logger = new ConsoleLogger();
+        [UsedImplicitly]
+        protected const string PrefixForCore2SelkieDlls = "Core2.Selkie.";
+
+        [UsedImplicitly]
+        protected readonly ConsoleLogger Logger = new ConsoleLogger();
+
+        [UsedImplicitly]
+        protected IEnumerable <Assembly> AllAssemblies = new Assembly[0];
 
         [ExcludeFromCodeCoverage]
-        public void Install([NotNull] IWindsorContainer container,
-                            [NotNull] IConfigurationStore store)
+        public virtual void Install([NotNull] IWindsorContainer container,
+                                    [NotNull] IConfigurationStore store)
         {
-            IEnumerable <Assembly> allAssemblies = AllAssembly().OrderBy(x => x.FullName).ToArray();
+            AllAssemblies = AllAssembly().OrderBy(x => x.FullName).ToArray();
 
             Assembly entryAssembly = Assembly.GetEntryAssembly();
-            Assembly selkieWindsor = GetSelkieWindsor(allAssemblies);
+            Assembly selkieWindsor = GetSelkieWindsor(AllAssemblies);
 
             container.Install(FromAssembly.Instance(selkieWindsor)); // need to install first, other depend on it
 
-            allAssemblies =
-                allAssemblies.Where(x => x != selkieWindsor &&
+            AllAssemblies =
+                AllAssemblies.Where(x => x != selkieWindsor &&
                                          x != entryAssembly &&
                                          !IsAssemblyNameIgnored(x.GetName()
-                                                                 .Name)); // don't install twice and avoid endless loop
+                                                                 .Name))
+                             .ToArray(); // don't install twice and avoid endless loop
 
-            DisplayAssemblies(allAssemblies);
+            DisplayAssemblies(AllAssemblies);
 
             CallInstallerForAllAssemblies(container,
-                                          allAssemblies);
+                                          AllAssemblies);
         }
 
         [UsedImplicitly]
@@ -66,7 +74,7 @@ namespace Core2.Selkie.Windsor
         {
             foreach ( FileInfo fileInfo in dlls )
             {
-                m_Logger.Debug($"Trying to load assembly for DLL {fileInfo.FullName}...");
+                Logger.Debug($"Trying to load assembly for DLL {fileInfo.FullName}...");
 
                 if ( IsFilenameIgnored(fileInfo.Name) )
                 {
@@ -83,8 +91,8 @@ namespace Core2.Selkie.Windsor
                 {
                     string message = $"Could not get assembly for DLL '{fileInfo.FullName}'!";
 
-                    m_Logger.Error(exception,
-                                   message);
+                    Logger.Error(exception,
+                                 message);
 
                     throw;
                 }
@@ -113,24 +121,24 @@ namespace Core2.Selkie.Windsor
         {
             string assemblyName = assembly.GetName().Name;
 
-            m_Logger.Info($"{assemblyName} - Checking...");
+            Logger.Info($"{assemblyName} - Checking...");
 
             if ( IsIgnoredAssemblyName(assemblyName) )
             {
-                m_Logger.Warn($"{assemblyName} - Ignored!");
+                Logger.Warn($"{assemblyName} - Ignored!");
 
                 return;
             }
 
             if ( IsAutoDetectAllowedForAssemblyName(assemblyName) )
             {
-                m_Logger.Info($"{assemblyName} - Processing...");
+                Logger.Info($"{assemblyName} - Processing...");
 
                 container.Install(FromAssembly.Instance(assembly));
             }
             else
             {
-                m_Logger.Warn($"{assemblyName} - Ignored! (because of IsAllowedAutoDetect(\"{assemblyName}\") returned false')");
+                Logger.Warn($"{assemblyName} - Ignored! (because of IsAllowedAutoDetect(\"{assemblyName}\") returned false')");
             }
         }
 
@@ -146,21 +154,21 @@ namespace Core2.Selkie.Windsor
 
         private void DisplayAssemblies(IEnumerable <Assembly> all)
         {
-            m_Logger.Info("Running installers for the following assemblies:");
+            Logger.Info("Running installers for the following assemblies:");
 
             foreach ( Assembly assembly in all )
             {
-                m_Logger.Info(assembly.FullName);
+                Logger.Info(assembly.FullName);
             }
         }
 
         private Assembly FindAssembly([NotNull] string fullname)
         {
             AssemblyName assemblyName = AssemblyName.GetAssemblyName(fullname);
-            m_Logger.Debug($"Found AssemblyName {assemblyName.FullName}...");
+            Logger.Debug($"Found AssemblyName {assemblyName.FullName}...");
 
             Assembly assembly = Assembly.Load(assemblyName);
-            m_Logger.Debug($"...loaded assembly {assembly.FullName}!");
+            Logger.Debug($"...loaded assembly {assembly.FullName}!");
 
             return assembly;
         }
@@ -170,7 +178,7 @@ namespace Core2.Selkie.Windsor
         {
             Assembly assembly = all.FirstOrDefault(IsCore2SelkieWindsorAssembly);
 
-            if (assembly == null)
+            if ( assembly == null )
             {
                 throw new ArgumentException($"Could not find {SelkieWindsorDllName} in application folder!");
             }
@@ -199,9 +207,9 @@ namespace Core2.Selkie.Windsor
 
             if ( isFileIgnored )
             {
-                m_Logger.Debug($"...{filename} " +
-                               $"was ignored because of fixed prefix '{PrefixForCore2SelkieDlls}' or " +
-                               $"IsAllowedAutoDetect(\"{filename}\") returned false!");
+                Logger.Debug($"...{filename} " +
+                             $"was ignored because of fixed prefix '{PrefixForCore2SelkieDlls}' or " +
+                             $"IsAllowedAutoDetect(\"{filename}\") returned false!");
             }
 
             return isFileIgnored;

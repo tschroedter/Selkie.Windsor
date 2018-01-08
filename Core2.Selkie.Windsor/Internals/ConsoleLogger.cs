@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Core2.Selkie.Windsor.Internals
 {
     [ExcludeFromCodeCoverage]
-    internal class ConsoleLogger
+    public class ConsoleLogger
     {
         public void Debug(string message)
         {
