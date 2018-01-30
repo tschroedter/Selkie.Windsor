@@ -49,6 +49,9 @@ namespace Core2.Selkie.Windsor
 
             CallInstallerForAllAssemblies(container,
                                           AllAssemblies);
+
+            InstallComponents(container,
+                              store);
         }
 
         [UsedImplicitly]
@@ -62,6 +65,7 @@ namespace Core2.Selkie.Windsor
 
         [UsedImplicitly]
         // ReSharper disable once VirtualMemberNeverOverridden.Global
+        // Todo call InstallComponents at the end of Install 
         protected virtual void InstallComponents([NotNull] IWindsorContainer container,
                                                  [NotNull] IConfigurationStore store)
         {
